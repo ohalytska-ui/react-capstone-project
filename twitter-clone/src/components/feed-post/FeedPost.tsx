@@ -33,7 +33,7 @@ export const FeedPost: FC = () => {
             marginRight: '15px',
           }}
         >
-          JS
+          te
         </Avatar>
         <div>
           <Title level={5}>John Smith</Title>
