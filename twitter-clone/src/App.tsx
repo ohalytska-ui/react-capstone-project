@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-function App() {
+import 'antd/dist/reset.css';
+import { Navigate, Route, Routes, MemoryRouter } from 'react-router-dom';
+import { Login, Signup, FeedTwitter } from './components';
+import { ConfigProvider } from 'antd';
+
+const App: FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Test</p>
-      </header>
-    </div>
+    <ConfigProvider>
+      <Routes>
+        <MemoryRouter>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/users" element={<FeedTwitter />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </MemoryRouter>
+      </Routes>
+    </ConfigProvider>
   );
-}
+};
 
 export default App;

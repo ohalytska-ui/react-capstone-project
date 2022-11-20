@@ -16,12 +16,11 @@ dotenv.config();
 const app = express();
 
 app.use(cors());
-app.use(express.static('public'));
 app.use(compression()); // compress all routes
 app.use(express.static(buildPath));
 
-app.get('/', (req, res) => {
-  res.json({ message: 'alive' });
+app.get('*', (req, res) => {
+  res.sendFile(`${buildPath}/index.html`);
 });
 
 app.listen(port, () => {
