@@ -19,9 +19,9 @@ app.use(cors());
 app.use(compression()); // compress all routes
 app.use(express.static(buildPath));
 
-// app.get('*', (req, res) => {
-//   res.sendFile(`${buildPath}/index.html`);
-// });
+app.get('*', (req, res) => {
+  res.sendFile(`${buildPath}/index.html`);
+});
 
 app.listen(port, () => {
   console.log(`Your app is listening at http://localhost:${port}`);
