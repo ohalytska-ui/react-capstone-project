@@ -68,7 +68,7 @@ In order to sign user up just `POST` the form contents to `http://localhost:3000
 
 In case you get stuck or have questions/suggestions for this repo feel free to create GitHub issue or reach people from "Professors" field in [GridU React course](https://gridu.litmos.com/home/LearningPath/26572?r=False&ts=637785982384795974).
 
-# ---------------------------------------------------------
+# ---------------
 
 ## Available Scripts
 
