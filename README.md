@@ -72,19 +72,21 @@ In case you get stuck or have questions/suggestions for this repo feel free to c
 
 ## Available Scripts
 
+## cd ./twitter-clone
+
 In the project directory, you can run:
 
 ### `npm start`
 
 Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
 
-Runs the server & client app.\
+Runs the server & client app.
 
 ### `npm run client-start`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Runs the client part app in the development mode.\
+Runs the client part app in the development mode.
 
 ### `npm test`
 
