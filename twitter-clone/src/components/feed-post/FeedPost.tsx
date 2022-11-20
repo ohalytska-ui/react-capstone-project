@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 
 import { Card, Typography } from 'antd';
-import { Avatar } from 'antd'; // Divider, List, Skeleton
+import { Avatar } from 'antd';
+// Divider, List, Skeleton
 // import InfiniteScroll from 'react-infinite-scroll-component';
 
 const { Text, Title } = Typography;
