@@ -15,12 +15,15 @@ let db = new sqlite3.Database(DB_PATH, (err) => {
 });
 
 // create users table
-db.run('CREATE TABLE IF NOT EXISTS users (_id TEXT PRIMARY KEY, username TEXT UNIQUE)', (err) => {
-  if (err) {
-    // cannot open table
-    console.error(err);
-    throw err;
-  }
-});
+db.run(
+  'CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, username TEXT UNIQUE, fullname TEXT, email TEXT, password TEXT)',
+  (err) => {
+    if (err) {
+      // cannot open table
+      console.error(err);
+      throw err;
+    }
+  },
+);
 
 export default db;

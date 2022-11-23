@@ -72,9 +72,7 @@ In case you get stuck or have questions/suggestions for this repo feel free to c
 
 ## Available Scripts
 
-## cd ./twitter-clone
-
-In the project directory, you can run:
+In the project twitter-clone directory, you can run:
 
 ### `npm start`
 
