@@ -14,8 +14,16 @@ export const Signup: FC = () => {
     form.resetFields();
   };
 
-  const onSubmit = (values: UserInfo) => {
-    console.log('Success:', values);
+  const onSubmit = async (newUser: UserInfo): Promise<void> => {
+    await fetch('/signup', {
+      method: 'POST',
+      body: JSON.stringify(newUser),
+      headers: { 'Content-Type': 'application/json' },
+    }).catch((error) => {
+      console.log(`Error: ${error}`);
+      return;
+    });
+
     onReset();
   };
 
@@ -46,6 +54,16 @@ export const Signup: FC = () => {
             form={form}
           >
             <Text style={{ display: 'flex', justifyContent: 'center', paddingBottom: '20px' }}>Sign up</Text>
+            <Form.Item label="Full name" name="fullname" rules={[{ required: true, message: 'Invalid full name!' }]}>
+              <Input placeholder="Full name" autoComplete="on" />
+            </Form.Item>
+            <Form.Item
+              label="Username"
+              name="username"
+              rules={[{ required: true, message: 'Invalid username!', max: MAX_NAME_LENGTH, min: MIN_TEXT_LENGTH }]}
+            >
+              <Input placeholder="Username" autoComplete="on" />
+            </Form.Item>
             <Form.Item
               label="Email"
               name="email"
@@ -66,16 +84,6 @@ export const Signup: FC = () => {
               ]}
             >
               <Input.Password placeholder="Password" autoComplete="on" />
-            </Form.Item>
-            <Form.Item
-              label="Username"
-              name="username"
-              rules={[{ required: true, message: 'Invalid username!', max: MAX_NAME_LENGTH, min: MIN_TEXT_LENGTH }]}
-            >
-              <Input placeholder="Username" autoComplete="on" />
-            </Form.Item>
-            <Form.Item label="Full name" name="fullname" rules={[{ required: true, message: 'Invalid full name!' }]}>
-              <Input placeholder="Full name" autoComplete="on" />
             </Form.Item>
             <Form.Item
               style={{
