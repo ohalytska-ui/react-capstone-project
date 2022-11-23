@@ -10,6 +10,6 @@ const usersRoutes = express.Router();
 /// USERS ROUTES ///
 
 // add new user account
-usersRoutes.post('/signup', usersController.createUserAccount);
+usersRoutes.post('/api/signup', usersController.createUserAccount);
 
 export default usersRoutes;
