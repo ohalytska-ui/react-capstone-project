@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { Card, Form, Input, Typography, Button, Layout } from 'antd';
 import { UserInfo, MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH, MAX_NAME_LENGTH, MIN_TEXT_LENGTH } from '../../models';
 import { emailRegExp } from '../../utils';
+import { addUserAccount } from '../../api';
 
 const { Text, Link } = Typography;
 const { Content } = Layout;
@@ -15,15 +16,7 @@ export const Signup: FC = () => {
   };
 
   const onSubmit = async (newUser: UserInfo): Promise<void> => {
-    await fetch('/signup', {
-      method: 'POST',
-      body: JSON.stringify(newUser),
-      headers: { 'Content-Type': 'application/json' },
-    }).catch((error) => {
-      console.log(`Error: ${error}`);
-      return;
-    });
-
+    await addUserAccount(newUser);
     onReset();
   };
 
