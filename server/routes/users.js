@@ -11,6 +11,7 @@ const usersRoutes = express.Router();
 
 // add new user account
 usersRoutes.post('/api/signup', usersController.createUserAccount);
+usersRoutes.get('/api/test', (req, res) => res.json({}));
 usersRoutes.post('/api/test', (req, res) => res.json({}));
 
 export default usersRoutes;
