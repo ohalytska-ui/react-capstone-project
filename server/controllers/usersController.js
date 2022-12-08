@@ -2,12 +2,12 @@
 
 // connect to the database
 import db from '../db/db.js';
-// to id
+// for id
 import crypto from 'crypto';
 
 // create a new user account
 
-const createUserAccount = (req, res, next) => {
+const createNewUserAccount = (req, res, next) => {
   const data = {
     id: crypto.randomBytes(20).toString('hex'),
     username: req.body.username,
@@ -32,6 +32,27 @@ const createUserAccount = (req, res, next) => {
 
 // check if user exist in db
 
+const logInToUserAccount = (req, res, next) => {
+  const select = 'SELECT * FROM users WHERE username = :username AND password = :password';
+  const params = [req.params.username, req.params.password];
+
+  db.get(select, params, (err, row) => {
+    if (err) {
+      res.status(400).json({ error: err });
+      console.error(err.message);
+      return next(err.message);
+    } else if (!row) {
+      res.status(400).json({ error: 'No such user!' });
+      console.error('No such user!');
+      return next('No such user!');
+    } else {
+      res.json(row);
+      return next(row);
+    }
+  });
+};
+
 export default {
-  createUserAccount,
+  createNewUserAccount,
+  logInToUserAccount,
 };
