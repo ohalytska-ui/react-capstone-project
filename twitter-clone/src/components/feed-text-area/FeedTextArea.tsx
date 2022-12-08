@@ -15,19 +15,8 @@ export const FeedTextArea: FC = () => {
     onReset();
   };
 
-  const onFinishFailed = (errorInfo: unknown) => {
-    console.log('Failed:', errorInfo);
-  };
-
   return (
-    <Form
-      name="signup"
-      initialValues={{ remember: true }}
-      onFinish={onSubmit}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
-      form={form}
-    >
+    <Form name="signup" initialValues={{ remember: true }} onFinish={onSubmit} autoComplete="off" form={form}>
       <Form.Item
         name={'text'}
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}

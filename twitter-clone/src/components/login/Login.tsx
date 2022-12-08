@@ -1,25 +1,26 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import { Card, Form, Input, Typography, Button, Layout } from 'antd';
 import { MAX_NAME_LENGTH, MAX_PASSWORD_LENGTH, MIN_TEXT_LENGTH, MIN_PASSWORD_LENGTH, UserProfile } from '../../models';
+import { useAuth } from '../../contexts/auth.context';
 
 const { Text, Link } = Typography;
 const { Content } = Layout;
 
 export const Login: FC = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
+  const { login, isAuthenticated } = useAuth();
 
-  const onReset = () => {
-    form.resetFields();
-  };
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/profile');
+    }
+  }, [isAuthenticated]);
 
-  const onSubmit = (values: UserProfile) => {
-    console.log('Success:', values);
-    onReset();
-  };
-
-  const onFinishFailed = (errorInfo: unknown) => {
-    console.log('Failed:', errorInfo);
+  const onSubmit = async (userProfile: UserProfile): Promise<void> => {
+    await login(userProfile);
   };
 
   return (
@@ -38,7 +39,6 @@ export const Login: FC = () => {
             name="login"
             initialValues={{ remember: true }}
             onFinish={onSubmit}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
             labelCol={{ span: 7 }}
             wrapperCol={{ span: 17 }}

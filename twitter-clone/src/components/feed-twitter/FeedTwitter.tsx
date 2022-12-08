@@ -1,14 +1,25 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import { FeedHeader } from '../feed-header';
 import { Layout } from 'antd';
 import { grey } from '@ant-design/colors';
 import { FeedTextArea } from '../feed-text-area';
 import { FeedPost } from '../feed-post';
+import { useAuth } from '../../contexts/auth.context';
+import { useNavigate } from 'react-router-dom';
 
 const { Content, Header } = Layout;
 
 export const FeedTwitter: FC = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated]);
+
   return (
     <Layout>
       <Header

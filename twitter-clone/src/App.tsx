@@ -4,16 +4,19 @@ import 'antd/dist/reset.css';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Login, Signup, FeedTwitter } from './components';
 import { ConfigProvider } from 'antd';
+import { AuthProvider } from './contexts/auth.context';
 
 const App: FC = () => {
   return (
     <ConfigProvider>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/users" element={<FeedTwitter />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/profile" element={<FeedTwitter />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AuthProvider>
     </ConfigProvider>
   );
 };

@@ -1,27 +1,32 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import { Card, Form, Input, Typography, Button, Layout } from 'antd';
 import { UserInfo, MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH, MAX_NAME_LENGTH, MIN_TEXT_LENGTH } from '../../models';
 import { emailRegExp } from '../../utils';
-import { addUserAccount } from '../../api';
+import { useAuth } from '../../contexts/auth.context';
+import { useNavigate } from 'react-router-dom';
 
 const { Text, Link } = Typography;
 const { Content } = Layout;
 
 export const Signup: FC = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
+  const { registration, isAuthenticated } = useAuth();
 
   const onReset = () => {
     form.resetFields();
   };
 
-  const onSubmit = async (newUser: UserInfo): Promise<void> => {
-    await addUserAccount(newUser);
-    onReset();
-  };
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/profile');
+    }
+  }, [isAuthenticated]);
 
-  const onFinishFailed = (errorInfo: unknown) => {
-    console.log('Failed:', errorInfo);
+  const onSubmit = async (newUser: UserInfo): Promise<void> => {
+    await registration(newUser);
+    onReset();
   };
 
   return (
@@ -40,7 +45,6 @@ export const Signup: FC = () => {
             name="signup"
             initialValues={{ remember: true }}
             onFinish={onSubmit}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
             labelCol={{ span: 7 }}
             wrapperCol={{ span: 17 }}
