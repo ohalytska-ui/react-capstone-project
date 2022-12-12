@@ -10,9 +10,13 @@ const usersRoutes = express.Router();
 /// USERS ROUTES ///
 
 // add new user account
-usersRoutes.post('/api/signup', usersController.createNewUserAccount);
+usersRoutes.post('/api/register', usersController.createNewUserAccount);
 
 // check if user exist in db
-usersRoutes.get('/api/login/:username/:password', usersController.logInToUserAccount);
+usersRoutes.post('/api/login', usersController.logInToUserAccount);
+
+// get user from db
+
+usersRoutes.get('/api/user', usersController.getUserAccountInfo);
 
 export default usersRoutes;

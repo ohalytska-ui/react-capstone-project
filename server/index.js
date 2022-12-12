@@ -24,12 +24,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(compression()); // compress all routes
 
-app.use(
-  cors({
-    origin: process.env.VERCEL_URL,
-  }),
-);
-
 // add routes
 app.use(usersRoutes);
 
