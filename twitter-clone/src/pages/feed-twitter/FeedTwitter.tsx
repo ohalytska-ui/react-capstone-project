@@ -1,12 +1,10 @@
 import React, { FC, useEffect } from 'react';
 
-import { FeedHeader } from '../feed-header';
 import { Layout } from 'antd';
 import { grey } from '@ant-design/colors';
-import { FeedTextArea } from '../feed-text-area';
-import { FeedPost } from '../feed-post';
 import { useAuth } from '../../contexts/auth.context';
 import { useNavigate } from 'react-router-dom';
+import { FeedPost, FeedTextArea, FeedHeader } from '../../components';
 
 const { Content, Header } = Layout;
 

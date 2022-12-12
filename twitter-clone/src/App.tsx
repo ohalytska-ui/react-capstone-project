@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import 'antd/dist/reset.css';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { Login, Signup, FeedTwitter } from './components';
+import { Login, Signup, FeedTwitter } from './pages';
 import { ConfigProvider } from 'antd';
 import { AuthProvider } from './contexts/auth.context';
 
