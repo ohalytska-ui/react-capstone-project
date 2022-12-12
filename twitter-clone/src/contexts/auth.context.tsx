@@ -1,18 +1,18 @@
-import React, { createContext, useContext, useMemo, useState } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { logInToUserAccount } from '../api';
 import { addNewUserAccount } from '../api';
 import { UserInfo, UserProfile, AuthContextValue } from '../models';
 import { AuthProviderProps } from './types';
 
-const getTokenFromLocalStorage = () => {
-  const token = window.localStorage.getItem('token');
+const getTokenFromLocalStorage = (): string | null => {
+  const token = localStorage.getItem('token');
   return token || null;
 };
 
 const storage = {
   getToken: () => getTokenFromLocalStorage(),
-  setToken: (token: string) => window.localStorage.setItem('token', token),
-  clear: () => window.localStorage.removeItem('token'),
+  setToken: (token: string) => localStorage.setItem('token', token),
+  clear: () => localStorage.removeItem('token'),
 };
 
 export const AuthContext = createContext<AuthContextValue | null>(null);
@@ -21,32 +21,43 @@ export const AuthContext = createContext<AuthContextValue | null>(null);
  * Provides the AuthContext to its child components.
  */
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }: AuthProviderProps) => {
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [token, setToken] = useState<string | null>();
   const getToken = async () => Promise.resolve().then(() => storage.getToken());
 
   const login = async (userProfile: UserProfile) => {
-    const isSuccessResponse = await logInToUserAccount(userProfile);
-    storage.setToken('test'); // TODO: get from backend
-    setIsSuccess(isSuccessResponse);
+    const res = await logInToUserAccount(userProfile);
+    if (res?.token) {
+      storage.setToken(res.token);
+      setToken(res.token);
+    }
   };
 
   const registration = async (newUser: UserInfo) => {
-    const isSuccessResponse = await addNewUserAccount(newUser);
-    storage.setToken('test'); // TODO: get from backend
-    setIsSuccess(isSuccessResponse);
+    const res = await addNewUserAccount(newUser);
+    if (res?.token) {
+      storage.setToken(res.token);
+      setToken(res.token);
+    }
   };
 
   const logout = () => {
     storage.clear();
-    setIsSuccess(false);
+    setToken(null);
   };
 
-  const token = useMemo(() => storage.getToken(), [isSuccess]);
+  useEffect(() => {
+    const token = storage.getToken();
+    if (token) {
+      setToken(token);
+    }
+  }, [token]);
+
+  const isAuthenticated = useMemo(() => !!token, [token]);
 
   return (
     <AuthContext.Provider
       value={{
-        isAuthenticated: !!token,
+        isAuthenticated: isAuthenticated,
         login,
         registration,
         logout,
