@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 
 // routes
 import usersRoutes from './routes/users.js';
+import tweetsRoutes from './routes/tweets.js';
 
 // server port
 const port = 5000 || process.env.PORT;
@@ -26,6 +27,7 @@ app.use(compression()); // compress all routes
 
 // add routes
 app.use(usersRoutes);
+app.use(tweetsRoutes);
 
 app.get('*', (req, res) => {
   res.sendFile(`${buildPath}/index.html`);

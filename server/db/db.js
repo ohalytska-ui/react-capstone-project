@@ -26,4 +26,13 @@ db.run(
   },
 );
 
+// create tweets table
+db.run('CREATE TABLE IF NOT EXISTS tweets (id TEXT PRIMARY KEY, userId TEXT, fullname TEXT, tweetText TEXT)', (err) => {
+  if (err) {
+    // cannot open table
+    console.error(err);
+    throw err;
+  }
+});
+
 export default db;

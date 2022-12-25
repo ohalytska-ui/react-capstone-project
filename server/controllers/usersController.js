@@ -15,12 +15,13 @@ const createNewUserAccount = async (req, res, next) => {
   const encryptedPassword = await bcrypt.hash(req.body.password, 10);
   const data = {
     id: crypto.randomBytes(20).toString('hex'),
-    username: req.body.username,
+    username: req.body.username.toLowerCase(), // sanitize: convert email to lowercase
     fullname: req.body.fullname,
     email: req.body.email.toLowerCase(), // sanitize: convert email to lowercase
     password: encryptedPassword,
   };
 
+  // named placeholders
   const insert = 'INSERT INTO users (id, username, fullname, email, password) VALUES (?,?,?,?,?)';
   const params = [data.id, data.username, data.fullname, data.email, data.password];
 
@@ -42,7 +43,7 @@ const createNewUserAccount = async (req, res, next) => {
       },
     );
 
-    res.json({ token: token });
+    res.status(201).json({ token: token });
     return next({ token: token });
   });
 };
@@ -54,6 +55,7 @@ const logInToUserAccount = (req, res, next) => {
     username: req.body.username,
     password: req.body.password,
   };
+  // named placeholders
   const select = 'SELECT * FROM users WHERE username = :username';
   const params = [data.username];
 
@@ -80,7 +82,7 @@ const logInToUserAccount = (req, res, next) => {
           },
         );
 
-        res.json({ token: token });
+        res.status(201).json({ token: token });
         return next({ token: token });
       } else {
         res.status(400).json({ error: 'Wrong password!' });
@@ -110,6 +112,7 @@ const getUserAccountInfo = (req, res, next) => {
       return next('A token is required!');
     }
 
+    // named placeholders
     const select = 'SELECT * FROM users WHERE username = :username';
     const params = [decoded.username];
 
