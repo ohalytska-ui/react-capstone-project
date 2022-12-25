@@ -1,1 +1,1 @@
-export * from './FeedPost';
+export * from './FeedPosts';

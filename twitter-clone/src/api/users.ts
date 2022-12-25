@@ -60,7 +60,7 @@ export const getUserAccountInfo = async (token: string) => {
   if (!res.ok) {
     notification.error({
       message: 'This user does not exist.',
-      description: 'Try once more!',
+      description: 'Try once more time!',
     });
   }
   return user;

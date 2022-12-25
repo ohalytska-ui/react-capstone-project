@@ -1,17 +1,25 @@
 import React, { FC } from 'react';
 
-import { MAX_TEXT_LENGTH, MIN_TEXT_LENGTH, Post } from '../../models';
+import { MAX_TEXT_LENGTH, MIN_TEXT_LENGTH, Post, Tweet } from '../../models';
 import { Button, Form, Input } from 'antd';
+import { FeedTextAreaProps } from './types';
+import { createNewUserTweet } from '../../api';
 
-export const FeedTextArea: FC = () => {
+export const FeedTextArea: FC<FeedTextAreaProps> = ({ user, setIsLoading }: FeedTextAreaProps) => {
   const [form] = Form.useForm();
 
   const onReset = () => {
     form.resetFields();
   };
 
-  const onSubmit = (values: Post) => {
-    console.log('Success:', values);
+  const onSubmit = async (tweetInfo: Post) => {
+    const newTweet: Tweet = {
+      tweetText: tweetInfo.text,
+      userId: user?.id,
+      fullname: user?.fullname,
+    };
+    createNewUserTweet(newTweet);
+    setIsLoading(true);
     onReset();
   };
 

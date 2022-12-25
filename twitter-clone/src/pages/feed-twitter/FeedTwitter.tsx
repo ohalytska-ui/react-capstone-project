@@ -1,16 +1,30 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import { Layout } from 'antd';
 import { grey } from '@ant-design/colors';
 import { useAuth } from '../../contexts/auth.context';
 import { useNavigate } from 'react-router-dom';
-import { FeedPost, FeedTextArea, FeedHeader } from '../../components';
+import { FeedPosts, FeedTextArea, FeedHeader } from '../../components';
+import { UserInfo } from '../../models';
+import { getUserAccountInfo } from '../../api';
 
 const { Content, Header } = Layout;
 
 export const FeedTwitter: FC = () => {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, getToken } = useAuth();
+  const [user, setUser] = useState<UserInfo>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    (async () => {
+      const token = await getToken();
+      if (token) {
+        const user = await getUserAccountInfo(token);
+        setUser(user);
+      }
+    })();
+  }, [getToken]);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -28,7 +42,7 @@ export const FeedTwitter: FC = () => {
           background: grey[2],
         }}
       >
-        <FeedHeader />
+        <FeedHeader user={user} />
       </Header>
       <Content
         style={{
@@ -40,8 +54,8 @@ export const FeedTwitter: FC = () => {
           flexDirection: 'column',
         }}
       >
-        <FeedTextArea />
-        <FeedPost />
+        <FeedTextArea user={user} setIsLoading={setIsLoading} />
+        <FeedPosts user={user} isLoading={isLoading} setIsLoading={setIsLoading} />
       </Content>
     </Layout>
   );
