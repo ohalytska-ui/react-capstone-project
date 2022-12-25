@@ -1,12 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import { MAX_TEXT_LENGTH, MIN_TEXT_LENGTH, Post, Tweet } from '../../models';
-import { Button, Form, Input } from 'antd';
+import { Button, Form } from 'antd';
 import { FeedTextAreaProps } from './types';
 import { createNewUserTweet } from '../../api';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 export const FeedTextArea: FC<FeedTextAreaProps> = ({ user, setIsLoading }: FeedTextAreaProps) => {
   const [form] = Form.useForm();
+  const [value, setValue] = useState('');
 
   const onReset = () => {
     form.resetFields();
@@ -23,6 +26,8 @@ export const FeedTextArea: FC<FeedTextAreaProps> = ({ user, setIsLoading }: Feed
     onReset();
   };
 
+  console.log('value', value);
+
   return (
     <Form name="signup" initialValues={{ remember: true }} onFinish={onSubmit} autoComplete="off" form={form}>
       <Form.Item
@@ -30,14 +35,7 @@ export const FeedTextArea: FC<FeedTextAreaProps> = ({ user, setIsLoading }: Feed
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
         rules={[{ required: true, message: 'Invalid text!', max: MAX_TEXT_LENGTH, min: MIN_TEXT_LENGTH }]}
       >
-        <Input.TextArea
-          name="text"
-          rows={6}
-          placeholder="What’s happening?"
-          maxLength={MAX_TEXT_LENGTH}
-          minLength={MIN_TEXT_LENGTH}
-          style={{ width: 800 }}
-        />
+        <ReactQuill theme="snow" value={value} onChange={setValue} />
       </Form.Item>
       <Form.Item
         style={{

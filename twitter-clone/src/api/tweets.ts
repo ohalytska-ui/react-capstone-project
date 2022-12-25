@@ -41,3 +41,28 @@ export const getAllUserTweets = async (userId: string) => {
   }
   return tweets;
 };
+
+// delete a user tweet
+
+export const deleteUserTweet = async (tweetId?: string) => {
+  const res = await fetch(`/api/user/tweet/${tweetId}/delete`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  console.log(res, res.ok);
+
+  if (!res.ok) {
+    notification.error({
+      message: 'Can not delete this tweet.',
+      description: 'Try once more time!',
+    });
+  }
+  if (res.ok) {
+    notification.success({
+      message: 'Successfully deleted tweet.',
+      description: 'Try once more time!',
+    });
+  }
+  return res.ok;
+};

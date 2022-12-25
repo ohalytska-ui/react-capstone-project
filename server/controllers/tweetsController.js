@@ -52,7 +52,23 @@ const getAllUserTweets = (req, res, next) => {
   });
 };
 
+const deleteUserTweet = (req, res, next) => {
+  const deleteSelect = 'DELETE FROM tweets WHERE id = :tweetId';
+  const params = [req.params.tweetId];
+
+  db.run(deleteSelect, params, (err, row) => {
+    if (err !== null && err) {
+      res.status(400).json({ error: err.message });
+      console.error(err.message);
+      return next(err.message);
+    }
+
+    res.status(200).json(row);
+  });
+};
+
 export default {
   createNewUserTweet,
   getAllUserTweets,
+  deleteUserTweet,
 };

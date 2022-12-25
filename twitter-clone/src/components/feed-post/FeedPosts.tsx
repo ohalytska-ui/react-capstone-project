@@ -6,8 +6,10 @@ import { Avatar } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Tweet } from '../../models';
 import { FeedPostsProps } from './types';
-import { getAllUserTweets } from '../../api';
+import { deleteUserTweet, getAllUserTweets } from '../../api';
 import { CloseOutlined } from '@ant-design/icons';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 export const FeedPosts: FC<FeedPostsProps> = ({ user, isLoading, setIsLoading }: FeedPostsProps) => {
   const [tweets, setTweets] = useState<Tweet[]>([]);
@@ -56,9 +58,15 @@ export const FeedPosts: FC<FeedPostsProps> = ({ user, isLoading, setIsLoading }:
                 <List.Item.Meta
                   avatar={<Avatar style={{ backgroundColor: grey[7] }}>{item?.fullname?.slice(0, 2) ?? ''}</Avatar>}
                   title={item?.fullname}
-                  description={item?.tweetText}
+                  description={<ReactMarkdown rehypePlugins={[rehypeRaw]}>{item?.tweetText}</ReactMarkdown>}
                 />
-                <Button type="text" onClick={() => console.log('here')}>
+                <Button
+                  type="text"
+                  onClick={() => {
+                    deleteUserTweet(item?.id);
+                    loadMoreData();
+                  }}
+                >
                   <CloseOutlined />
                 </Button>
               </List.Item>

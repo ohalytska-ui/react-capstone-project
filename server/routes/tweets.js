@@ -17,4 +17,8 @@ tweetsRoutes.post('/api/user/tweet', tweetsController.createNewUserTweet);
 
 tweetsRoutes.get('/api/user/:userId/tweets', tweetsController.getAllUserTweets);
 
+// delete a user tweet
+
+tweetsRoutes.delete('/api/user/tweet/:tweetId/delete', tweetsController.deleteUserTweet);
+
 export default tweetsRoutes;
