@@ -5,6 +5,7 @@ import { Button, Form } from 'antd';
 import { FeedTextAreaProps } from './types';
 import { createNewUserTweet } from '../../api';
 import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 export const FeedTextArea: FC<FeedTextAreaProps> = ({ user, setIsLoading }: FeedTextAreaProps) => {
   const [form] = Form.useForm();
