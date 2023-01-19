@@ -9,7 +9,7 @@ import crypto from 'crypto';
 
 const createNewUserTweet = async (req, res, next) => {
   const data = {
-    id: crypto.randomBytes(20).toString('hex'),
+    id: req.body.id ?? crypto.randomBytes(20).toString('hex'),
     userId: req.body.userId,
     fullname: req.body.fullname,
     tweetText: req.body.tweetText,
@@ -19,15 +19,31 @@ const createNewUserTweet = async (req, res, next) => {
   const insert = 'INSERT INTO tweets (id, userId, fullname, tweetText) VALUES (?,?,?,?)';
   const params = [data.id, data.userId, data.fullname, data.tweetText];
 
-  db.run(insert, params, function (err, row) {
-    if (err) {
-      res.status(400).json({ error: err.message });
-      console.error(err.message);
-      return next(err.message);
-    }
-    res.status(201).json(row);
-    return next(row);
-  });
+  console.log('params', params);
+
+  if (!data.userId) {
+    res.status(400).json('No userId!');
+    console.error('No userId!');
+    return next('No userId!');
+  } else if (!data.fullname) {
+    res.status(400).json('No fullname!');
+    console.error('No fullname!');
+    return next('No fullname!');
+  } else if (!data.tweetText) {
+    res.status(400).json('No tweetText!');
+    console.error('No tweetText!');
+    return next('No tweetText!');
+  } else {
+    db.run(insert, params, function (err, row) {
+      if (err) {
+        res.status(400).json({ error: err.message });
+        console.error(err.message);
+        return next(err.message);
+      }
+      res.status(201).json(row);
+      return next(row);
+    });
+  }
 };
 
 // get all user tweets
@@ -61,9 +77,13 @@ const deleteUserTweet = (req, res, next) => {
       res.status(400).json({ error: err.message });
       console.error(err.message);
       return next(err.message);
+    } else if (!row) {
+      res.status(400).json('No tweet!');
+      console.error('No tweet!');
+      return next('No tweet!');
+    } else {
+      res.status(200).json(row);
     }
-
-    res.status(200).json(row);
   });
 };
 
