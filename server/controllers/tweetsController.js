@@ -19,8 +19,6 @@ const createNewUserTweet = async (req, res, next) => {
   const insert = 'INSERT INTO tweets (id, userId, fullname, tweetText) VALUES (?,?,?,?)';
   const params = [data.id, data.userId, data.fullname, data.tweetText];
 
-  console.log('params', params);
-
   if (!data.userId) {
     res.status(400).json('No userId!');
     console.error('No userId!');
