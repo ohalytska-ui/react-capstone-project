@@ -51,7 +51,11 @@ export const Signup: FC = () => {
             form={form}
           >
             <Text style={{ display: 'flex', justifyContent: 'center', paddingBottom: '20px' }}>Sign up</Text>
-            <Form.Item label="Full name" name="fullname" rules={[{ required: true, message: 'Invalid full name!' }]}>
+            <Form.Item
+              label="Full name"
+              name="fullname"
+              rules={[{ required: true, message: 'Invalid full name!', max: MAX_NAME_LENGTH, min: MIN_TEXT_LENGTH }]}
+            >
               <Input placeholder="Full name" autoComplete="on" />
             </Form.Item>
             <Form.Item
@@ -64,7 +68,7 @@ export const Signup: FC = () => {
             <Form.Item
               label="Email"
               name="email"
-              rules={[{ required: true, message: 'Invalid email!', pattern: emailRegExp }]}
+              rules={[{ required: true, message: 'Invalid email!', pattern: emailRegExp, max: MAX_NAME_LENGTH }]}
             >
               <Input placeholder="Email" autoComplete="on" />
             </Form.Item>

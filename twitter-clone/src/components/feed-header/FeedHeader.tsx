@@ -5,11 +5,13 @@ import { grey } from '@ant-design/colors';
 import { TwitterOutlined } from '@ant-design/icons';
 import { useAuth } from '../../contexts/auth.context';
 import { FeedHeaderProps } from './types';
+import { useNavigate } from 'react-router-dom';
 
 const { Text } = Typography;
 
 export const FeedHeader: FC<FeedHeaderProps> = ({ user }: FeedHeaderProps) => {
   const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const items: MenuProps['items'] = [
     {
@@ -17,6 +19,22 @@ export const FeedHeader: FC<FeedHeaderProps> = ({ user }: FeedHeaderProps) => {
       label: (
         <Button type="text" onClick={() => logout()}>
           Log out
+        </Button>
+      ),
+    },
+    {
+      key: 'my-account',
+      label: (
+        <Button type="text" onClick={() => navigate('/account')}>
+          My account
+        </Button>
+      ),
+    },
+    {
+      key: 'profile',
+      label: (
+        <Button type="text" onClick={() => navigate('/profile')}>
+          Profile
         </Button>
       ),
     },

@@ -50,8 +50,6 @@ export const deleteUserTweet = async (tweetId?: string) => {
     headers: { 'Content-Type': 'application/json' },
   });
 
-  console.log(res, res.ok);
-
   if (!res.ok) {
     notification.error({
       message: 'Can not delete this tweet.',

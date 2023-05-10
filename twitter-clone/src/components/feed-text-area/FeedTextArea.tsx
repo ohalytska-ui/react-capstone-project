@@ -26,8 +26,6 @@ export const FeedTextArea: FC<FeedTextAreaProps> = ({ user, setIsLoading }: Feed
     onReset();
   };
 
-  console.log('value', value);
-
   return (
     <Form name="signup" initialValues={{ remember: true }} onFinish={onSubmit} autoComplete="off" form={form}>
       <Form.Item
@@ -44,7 +42,7 @@ export const FeedTextArea: FC<FeedTextAreaProps> = ({ user, setIsLoading }: Feed
         }}
       >
         <Button type="primary" htmlType="submit">
-          Tweet
+          Add
         </Button>
       </Form.Item>
     </Form>
