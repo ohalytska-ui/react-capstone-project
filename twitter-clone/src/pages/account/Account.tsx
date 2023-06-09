@@ -34,15 +34,15 @@ export const Account: FC = () => {
 
   const listData = [
     {
-      key: 'Full name:',
+      key: 'Повне імя:',
       title: user?.fullname,
     },
     {
-      key: 'User name:',
+      key: 'Імя користувача:',
       title: user?.username,
     },
     {
-      key: 'Email:',
+      key: 'Електронна пошта:',
       title: user?.email,
     },
   ];
@@ -71,7 +71,7 @@ export const Account: FC = () => {
       >
         <List
           itemLayout="horizontal"
-          header={<div>Your info</div>}
+          header={<div>Ваша інформація</div>}
           bordered
           dataSource={listData}
           style={{

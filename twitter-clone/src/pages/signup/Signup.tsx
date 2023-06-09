@@ -40,7 +40,7 @@ export const Signup: FC = () => {
           height: '100vh',
         }}
       >
-        <Card style={{ width: 400 }}>
+        <Card style={{ width: 550 }}>
           <Form
             name="signup"
             initialValues={{ remember: true }}
@@ -50,30 +50,30 @@ export const Signup: FC = () => {
             wrapperCol={{ span: 17 }}
             form={form}
           >
-            <Text style={{ display: 'flex', justifyContent: 'center', paddingBottom: '20px' }}>Sign up</Text>
+            <Text style={{ display: 'flex', justifyContent: 'center', paddingBottom: '20px' }}>Зареєструватися</Text>
             <Form.Item
-              label="Full name"
+              label="Повне ім'я"
               name="fullname"
               rules={[{ required: true, message: 'Invalid full name!', max: MAX_NAME_LENGTH, min: MIN_TEXT_LENGTH }]}
             >
-              <Input placeholder="Full name" autoComplete="on" />
+              <Input placeholder="Повне ім'я" autoComplete="on" />
             </Form.Item>
             <Form.Item
-              label="Username"
+              label="Ім'я користувача"
               name="username"
               rules={[{ required: true, message: 'Invalid username!', max: MAX_NAME_LENGTH, min: MIN_TEXT_LENGTH }]}
             >
-              <Input placeholder="Username" autoComplete="on" />
+              <Input placeholder="Ім'я користувача" autoComplete="on" />
             </Form.Item>
             <Form.Item
-              label="Email"
+              label="Електронна пошта"
               name="email"
               rules={[{ required: true, message: 'Invalid email!', pattern: emailRegExp, max: MAX_NAME_LENGTH }]}
             >
-              <Input placeholder="Email" autoComplete="on" />
+              <Input placeholder="Електронна пошта" autoComplete="on" />
             </Form.Item>
             <Form.Item
-              label="Password"
+              label="Пароль"
               name="password"
               rules={[
                 {
@@ -84,7 +84,7 @@ export const Signup: FC = () => {
                 },
               ]}
             >
-              <Input.Password placeholder="Password" autoComplete="on" />
+              <Input.Password placeholder="Пароль" autoComplete="on" />
             </Form.Item>
             <Form.Item
               style={{
@@ -93,12 +93,12 @@ export const Signup: FC = () => {
               }}
             >
               <Button type="primary" htmlType="submit">
-                Sign up
+                Зареєструватися
               </Button>
             </Form.Item>
           </Form>
           <Text style={{ display: 'flex', justifyContent: 'center' }}>
-            Already have an account?
+            Вже є аккаунт?
             <Link
               underline
               style={{
@@ -106,7 +106,7 @@ export const Signup: FC = () => {
               }}
               href="/"
             >
-              Log in
+              Авторизуватися
             </Link>
           </Text>
         </Card>

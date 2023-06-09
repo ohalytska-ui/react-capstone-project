@@ -13,6 +13,10 @@ const tweetsRoutes = express.Router();
 
 tweetsRoutes.post('/api/user/tweet', tweetsController.createNewUserTweet);
 
+// update an user tweet
+
+tweetsRoutes.put('/api/user/tweet/:tweetId', tweetsController.updateNewUserTweet);
+
 // get all user tweets
 
 tweetsRoutes.get('/api/user/:userId/tweets', tweetsController.getAllUserTweets);

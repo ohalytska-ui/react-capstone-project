@@ -33,7 +33,7 @@ export const FeedTextArea: FC<FeedTextAreaProps> = ({ user, setIsLoading }: Feed
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
         rules={[{ required: true, message: 'Invalid text!', max: MAX_TEXT_LENGTH, min: MIN_TEXT_LENGTH }]}
       >
-        <ReactQuill theme="snow" value={value} onChange={setValue} />
+        <ReactQuill theme="snow" value={value} onChange={setValue} placeholder="Введіть ваше повідомлення..." />
       </Form.Item>
       <Form.Item
         style={{
@@ -42,7 +42,7 @@ export const FeedTextArea: FC<FeedTextAreaProps> = ({ user, setIsLoading }: Feed
         }}
       >
         <Button type="primary" htmlType="submit">
-          Add
+          Додати
         </Button>
       </Form.Item>
     </Form>

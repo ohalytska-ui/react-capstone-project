@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 
 import { Avatar, Button, Dropdown, List, MenuProps, Typography } from 'antd';
 import { grey } from '@ant-design/colors';
-import { TwitterOutlined } from '@ant-design/icons';
 import { useAuth } from '../../contexts/auth.context';
 import { FeedHeaderProps } from './types';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +17,7 @@ export const FeedHeader: FC<FeedHeaderProps> = ({ user }: FeedHeaderProps) => {
       key: 'logout',
       label: (
         <Button type="text" onClick={() => logout()}>
-          Log out
+          Вийти
         </Button>
       ),
     },
@@ -26,7 +25,7 @@ export const FeedHeader: FC<FeedHeaderProps> = ({ user }: FeedHeaderProps) => {
       key: 'my-account',
       label: (
         <Button type="text" onClick={() => navigate('/account')}>
-          My account
+          Моя інформація
         </Button>
       ),
     },
@@ -34,7 +33,7 @@ export const FeedHeader: FC<FeedHeaderProps> = ({ user }: FeedHeaderProps) => {
       key: 'profile',
       label: (
         <Button type="text" onClick={() => navigate('/profile')}>
-          Profile
+          Профіль
         </Button>
       ),
     },
@@ -48,14 +47,13 @@ export const FeedHeader: FC<FeedHeaderProps> = ({ user }: FeedHeaderProps) => {
     >
       <List.Item>
         <div className="feed-header-title">
-          <TwitterOutlined />
           <Text
             style={{
               color: grey[10],
               paddingLeft: '15px',
             }}
           >
-            Another Twitter Clone
+            Лого
           </Text>
         </div>
         <Dropdown menu={{ items }}>

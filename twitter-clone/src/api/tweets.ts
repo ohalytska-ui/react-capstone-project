@@ -2,6 +2,7 @@ import { notification } from 'antd';
 import { Tweet } from '../models';
 
 // create a new user tweet
+
 export const createNewUserTweet = async (tweet: Tweet) => {
   const res = await fetch('/api/user/tweet', {
     method: 'POST',
@@ -59,6 +60,32 @@ export const deleteUserTweet = async (tweetId?: string) => {
   if (res.ok) {
     notification.success({
       message: 'Successfully deleted tweet.',
+      description: 'Try once more time!',
+    });
+  }
+  return res.ok;
+};
+
+// update user tweet
+export const updateUserTweet = async (tweetId: string, tweetText: string) => {
+  const message = {
+    tweetText: tweetText,
+  };
+  const res = await fetch(`/api/user/tweet/${tweetId}`, {
+    method: 'PUT',
+    body: JSON.stringify(message),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  if (!res.ok) {
+    notification.error({
+      message: 'Could not update your tweet.',
+      description: 'Try once more time!',
+    });
+  }
+  if (res.ok) {
+    notification.success({
+      message: 'Successfully updated your tweet.',
       description: 'Try once more time!',
     });
   }

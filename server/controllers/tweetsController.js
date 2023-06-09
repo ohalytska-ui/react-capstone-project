@@ -44,6 +44,30 @@ const createNewUserTweet = async (req, res, next) => {
   }
 };
 
+const updateNewUserTweet = async (req, res, next) => {
+  const tweetId = req.params.tweetId;
+  const tweetText = req.body.tweetText;
+
+  // named placeholders
+  const update = 'UPDATE tweets SET tweetText = ? WHERE (id = :tweetId)';
+  const params = [tweetText, tweetId];
+
+  if (!tweetText) {
+    res.status(400).json('No tweetText!');
+    return next('No tweetText!');
+  } else {
+    db.run(update, params, function (err, row) {
+      if (err) {
+        res.status(400).json({ error: err.message });
+        console.error(err.message);
+        return next(err.message);
+      }
+      res.status(200).json(row);
+      return next(row);
+    });
+  }
+};
+
 // get all user tweets
 
 const getAllUserTweets = (req, res, next) => {
@@ -87,6 +111,7 @@ const deleteUserTweet = (req, res, next) => {
 
 export default {
   createNewUserTweet,
+  updateNewUserTweet,
   getAllUserTweets,
   deleteUserTweet,
 };

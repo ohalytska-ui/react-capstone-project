@@ -34,7 +34,7 @@ export const Login: FC = () => {
           height: '100vh',
         }}
       >
-        <Card style={{ width: 400 }}>
+        <Card style={{ width: 550 }}>
           <Form
             name="login"
             initialValues={{ remember: true }}
@@ -44,9 +44,9 @@ export const Login: FC = () => {
             wrapperCol={{ span: 17 }}
             form={form}
           >
-            <Text style={{ display: 'flex', justifyContent: 'center', paddingBottom: '20px' }}>Log in</Text>
+            <Text style={{ display: 'flex', justifyContent: 'center', paddingBottom: '20px' }}>Авторизуватися</Text>
             <Form.Item
-              label="Username"
+              label="Ім'я користувача"
               name="username"
               rules={[
                 {
@@ -57,10 +57,10 @@ export const Login: FC = () => {
                 },
               ]}
             >
-              <Input placeholder="Username" autoComplete="on" />
+              <Input placeholder="Ім'я користувача" autoComplete="on" />
             </Form.Item>
             <Form.Item
-              label="Password"
+              label="Пароль"
               name="password"
               rules={[
                 {
@@ -71,7 +71,7 @@ export const Login: FC = () => {
                 },
               ]}
             >
-              <Input.Password placeholder="Password" autoComplete="on" />
+              <Input.Password placeholder="Пароль" autoComplete="on" />
             </Form.Item>
             <Form.Item
               style={{
@@ -80,12 +80,12 @@ export const Login: FC = () => {
               }}
             >
               <Button type="primary" htmlType="submit">
-                Log in
+                Авторизуватися
               </Button>
             </Form.Item>
           </Form>
           <Text style={{ display: 'flex', justifyContent: 'center' }}>
-            Don’t have an account?
+            Немає облікового запису?
             <Link
               underline
               style={{
@@ -93,7 +93,7 @@ export const Login: FC = () => {
               }}
               href="/signup"
             >
-              Sign up
+              Зареєструватися
             </Link>
           </Text>
         </Card>

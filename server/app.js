@@ -11,7 +11,7 @@ import usersRoutes from './routes/users.js';
 import tweetsRoutes from './routes/tweets.js';
 
 // server port
-const port = 5000 || process.env.PORT;
+const port = 4000 || process.env.PORT;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const buildPath = path.join(__dirname, '../twitter-clone/build');
 
